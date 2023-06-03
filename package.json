@@ -2,7 +2,7 @@
   "name": "vue-code-map",
   "displayName": "vue code map",
   "description": "The purpose of this extension is to generate a simple code flow map from vue code",
-  "version": "0.0.1",
+  "version": "0.0.1-POC",
   "repository": {
     "type": "git",
     "url": "https://github.com/pratheeshrussell/vue-code-map"

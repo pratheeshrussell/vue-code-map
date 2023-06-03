@@ -17,14 +17,21 @@ The purpose of this extension is to generate a simple code flow map from vue cod
 
 ## Known Issues
 
-* Not able to differentiate between if and else-if statements
+* Not able to differentiate between if and else-if statements in functions
+
+## TO DO
+* handling computed props in a simillar way to methods - problem is to handle with and without getter/setter function
+* handling watchers props in a simillar way to methods - problem is to handle with and without handler function
+* Add support for else,else if and switch in template
+* add support for composition
+* refactor the code - at this rate I wont understand what is written in after 2 days
 
 ## Installing the extension
 * Go to the releases page  
 * Download the vsix file  
 * Run command  
 ```
-code --install-extension vue-code-map-0.0.1.vsix
+code --install-extension vue-code-map-0.0.1-POC.vsix
 ```
 
 ## Release Notes

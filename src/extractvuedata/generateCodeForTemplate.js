@@ -2,9 +2,7 @@ const AstPropsModel =  require('./AstPropsModel.js')
 
 function generateCodeForTemplate(templateAST) {
     const code = 'subgraph Template\n' +  
-    generateMermaidCode(templateAST) + 'end';
-    // add property binding graph
-
+    generateMermaidCode(templateAST) + 'end\n';
     return code;
 }
 
@@ -44,6 +42,19 @@ function generateMermaidCode(node) {
            let methodId = getMethodId(method);
            code += `${componentId} -- "<span>${binding.name}</span>" --> ${methodId}\n`;
           }
+        }else if(binding.type == 'property' || binding.type == 'model'){
+          // check if it is a property or a computed item
+          let data = identifyData(binding.value);
+          let computed = identifyComputed(binding.value);
+          const leadingArrow = (binding.type == 'property' ? '--' : '<--');
+          const bindingName = (binding.type == 'property' ? binding.name : 'v-model');
+          if(data){
+            let dataId = getDataId(data);
+            code += `${componentId} ${leadingArrow} "<span>${bindingName}</span>" --> ${dataId}\n`;
+           }else if(computed){
+            let compId = getComputedId(computed);
+            code += `${componentId} ${leadingArrow} "<span>${bindingName}</span>" --> ${compId}\n`;
+           }
         }
       }
     }
@@ -85,9 +96,32 @@ function generateMermaidCode(node) {
     }
     return null;
   }
+  function identifyData(methodName){
+    // will only work if we set up scripts first
+    let datas = AstPropsModel.identifyData(methodName);
+    if(datas.length > 0){
+      return datas[0];
+    }
+    return null;
+  }
+  function identifyComputed(methodName){
+    // will only work if we set up scripts first
+    let computed = AstPropsModel.identifyComputed(methodName);
+    if(computed.length > 0){
+      return computed[0];
+    }
+    return null;
+  }
 
   function getMethodId(methodName) {
     return AstPropsModel.getMethodId(methodName,'member');
+  }
+  
+  function getDataId(dataName) {
+    return AstPropsModel.getDataId(dataName);
+  }
+  function getComputedId(computedName) {
+    return AstPropsModel.getComputedId(computedName);
   }
 
 

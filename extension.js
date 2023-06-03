@@ -37,7 +37,7 @@ function activate(context) {
 			// generate this second
 			const astTemplateFlowChart = generateCodeForTemplate(templateAST);
 
-			const mermaidCode = 'graph TD\n' + scriptCode  + '\n' + astTemplateFlowChart;
+			const mermaidCode = 'graph TD\n' + scriptCode  +  astTemplateFlowChart;
 			showWebPanel(mermaidCode);
 			}else{
 				vscode.window.showErrorMessage(errorStrings.CompositionNotSupported);
