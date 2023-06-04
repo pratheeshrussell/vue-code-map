@@ -6,6 +6,16 @@
       <input type="text" v-model="getAConditionToBeTrue" />
       <span>Hello</span>
     </div>
+    <div v-else-if='!aConditionToBeTrue'>
+      <span>False cond</span>
+    </div>
+    <div v-else='aConditionToBeTrue'>
+      <span>Will never trigger</span>
+    </div>
+  
+    <div v-for='fruit in fruitList'>
+      <span>{{fruit}}</span>
+    </div>
     
   </div>
   </template>
@@ -15,7 +25,8 @@
   data() {
    return {
       message: 'Hello, Vue!',
-      aConditionToBeTrue:true
+      aConditionToBeTrue:true,
+      fruitList: ['apple','orange']
    };
    },
    computed:{

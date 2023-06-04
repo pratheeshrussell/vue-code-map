@@ -69,10 +69,21 @@ function generateMermaidCode(node) {
     if (childNode.bindings && childNode.bindings.length > 0) {
         for (const binding of childNode.bindings) {
             // need to add else, else if also
-            if(binding.type == 'if'){
+            if(binding.type == 'if' || binding.type == 'else-if' || binding.type == 'show'){
                 code += `${componentId} -- "<span>${binding.type}</span> (<small>${binding.value}</small>)" --> ${childComponentId}\n`;
                 bindingset = true;
-            }
+            }else if(binding.type == 'else'){
+              code += `${componentId} -- "<span>else</span>" --> ${childComponentId}\n`;
+              bindingset = true;
+          }
+            else if(binding.type == 'for'){
+              let data = identifyData(binding.value);
+              let computed = identifyComputed(binding.value);
+              let identifiedVar = data ? data : (computed ? computed : null);
+              let condition = identifiedVar ? `(<small>${identifiedVar}</small>)` : "";
+              code += `${componentId} -- "<span>${binding.type}</span> ${condition}" --> ${childComponentId}\n`;
+              bindingset = true;
+          }
         }
       }
       if(bindingset == false){

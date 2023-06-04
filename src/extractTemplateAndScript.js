@@ -45,6 +45,9 @@ function extractBindings(ast) {
           } else if (
             attr.name == "model" ||
             attr.name == "if" ||
+            attr.name == "else-if" ||
+            attr.name == "else" ||
+            attr.name == "show" ||
             attr.name == "for"
           ) {
             const propName = "";
