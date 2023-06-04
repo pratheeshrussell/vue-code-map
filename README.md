@@ -5,6 +5,8 @@
 
 The purpose of this extension is to generate a simple code flow map from vue code.
 
+![Convert code to chart](docs/flowdiagram.png)
+
 ## How to use
 * Open a .vue file  
 * Open command Palette  
