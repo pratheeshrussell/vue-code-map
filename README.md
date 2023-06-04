@@ -21,9 +21,9 @@ The purpose of this extension is to generate a simple code flow map from vue cod
 
 ## TO DO
 * handling computed props in a simillar way to methods - problem is to handle with and without getter/setter function
-* handling watchers props in a simillar way to methods - problem is to handle with and without handler function
+* handling lifecyclehooks
 * add support for composition
-* refactor the code - at this rate I wont understand what is written in after 2 days
+* refactor the code - at this rate I wont understand what I have written after 2 days
 
 ## Installing the extension
 * Go to the releases page  

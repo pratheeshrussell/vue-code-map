@@ -37,7 +37,7 @@ function activate(context) {
 			// generate this second
 			const astTemplateFlowChart = generateCodeForTemplate(templateAST);
 
-			const mermaidCode = 'graph TD\n' + scriptCode  +  astTemplateFlowChart;
+			const mermaidCode = 'graph LR\n' + scriptCode  +  astTemplateFlowChart;
 			
 			showWebPanel(mermaidCode, getFileName(document.uri));
 			}else{

@@ -9,7 +9,7 @@
     <div v-else-if='!aConditionToBeTrue'>
       <span>False cond</span>
     </div>
-    <div v-else='aConditionToBeTrue'>
+    <div v-else>
       <span>Will never trigger</span>
     </div>
   
@@ -43,9 +43,20 @@
     }
    },
    watch:{
-    getAConditionToBeTrue(){
-      this.defaultFunction();
+    getAConditionToBeTrue:{
+      handler(){
+        this.defaultFunction();
+      }
+    },
+    getBConditionToBeTrue(){
+      if (this.aConditionToBeTrue) {
+        this.defaultFunction();
+      }
+    },
+    getCConditionToBeTrue(){
+       
     }
+
    },
    mounted(){
   
