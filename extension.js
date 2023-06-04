@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const {getHTML, generateMermaidCode, getFileExtension} = require('./src/supportFunctions.js');
+const {getHTML,getFileName, getFileExtension} = require('./src/supportFunctions.js');
 const {errorStrings} = require('./src/strings.js');
 
 // vue data extract
@@ -38,7 +38,8 @@ function activate(context) {
 			const astTemplateFlowChart = generateCodeForTemplate(templateAST);
 
 			const mermaidCode = 'graph TD\n' + scriptCode  +  astTemplateFlowChart;
-			showWebPanel(mermaidCode);
+			
+			showWebPanel(mermaidCode, getFileName(document.uri));
 			}else{
 				vscode.window.showErrorMessage(errorStrings.CompositionNotSupported);
 			}
@@ -53,7 +54,7 @@ function activate(context) {
 		context.subscriptions.push(disposable);
 }
 
-function showWebPanel(mermaidCode){
+function showWebPanel(mermaidCode,filename){
 	// Create a new webview panel
 	const panel = vscode.window.createWebviewPanel(
 		'vueCodeMapWindow', // Unique identifier for the panel
@@ -64,8 +65,10 @@ function showWebPanel(mermaidCode){
 		  enableForms: true
 		}
 	  );
+	  let title = filename ? filename : 'Anonymous';
+	  panel.title = `${filename} - Vue Code Map`;
 	  // Set the HTML content in the webview panel
-	  panel.webview.html = getHTML(mermaidCode);
+	  panel.webview.html = getHTML(mermaidCode,title);
 }
 
 // This method is called when your extension is deactivated
