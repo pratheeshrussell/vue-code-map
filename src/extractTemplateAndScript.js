@@ -54,7 +54,7 @@ function extractBindings(ast) {
             bindings.push({
               type: attr.name,
               name: propName,
-              value: attr.exp.content,
+              value: attr.name != "else" ? attr.exp.content : null,
             });
           }
         }
