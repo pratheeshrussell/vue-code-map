@@ -58,7 +58,7 @@ function getMermaidGraphForMethods(flowChart,type='method') {
         call.to.forEach((calledMethod, i) => {
           if(call.type === 'switch' && call.condition ==null)
           {call.condition ='default case';}
-          graphCode += `${genIdFunc(methodName)} -->|"${call.type}(${call.condition})"| ${genIdFunc(calledMethod.name,calledMethod.type)}["${calledMethod.name}"]\n`;
+          graphCode += `${genIdFunc(methodName)} -->|"${call.type}(${call.condition.replace(/"/g, "'")})"| ${genIdFunc(calledMethod.name,calledMethod.type)}["${calledMethod.name}"]\n`;
         });
       } else if (call.type === 'else' ) {
         call.to.forEach((calledMethod, i) => {

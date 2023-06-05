@@ -116,7 +116,8 @@ class UtilityFunctions {
           
           const methodCalls = currentInstance.processJumpsAndCalls(path,currentInstance);
           if(methodName == 'handler'){
-            const parentKey = path.parentPath.container?.key.name;
+            const containerkey = path.parentPath.container?.key;
+            const parentKey = containerkey.name ? containerkey.name : containerkey.value;
             flowChart.push({ [parentKey]: methodCalls });
           }else{
             flowChart.push({ [methodName]: methodCalls });
